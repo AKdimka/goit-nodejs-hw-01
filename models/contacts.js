@@ -14,7 +14,7 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {
 	const contacts = await db.read()
-	const index = contacts.findIndex(cat => cat.id === contactId)
+	const index = contacts.findIndex(contact => contact.id === contactId)
 
 	if (index !== -1) {
 		const [contact] = contacts.splice(index, 1)
@@ -38,7 +38,7 @@ const addContact = async (body) => {
 
 const updateContact = async (contactId, body) => {
 	const contacts = await db.read()
-	const index = contacts.findIndex(cat => cat.id === contactId)
+	const index = contacts.findIndex(contact => contact.id === contactId)
 
 	if (index !== -1) {
 		contacts[index] = { ...contacts[index], ...body }
