@@ -9,15 +9,10 @@ const HTTP_STATUS = {
 	INTERNAL_SERVER_ERROR: 500
 };
 
-const Role = {
-	ADMIN: 'admin',
-	USER: 'user',
-};
-
 const Subscription = {
 	STARTER: "starter",
 	PRO: "pro",
 	BUSSINESS: "business"
 }
 
-module.exports = { HTTP_STATUS, Role, Subscription };
+module.exports = { HTTP_STATUS, Subscription };
