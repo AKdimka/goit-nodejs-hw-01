@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const Users = require('../repository/users')
-const { HTTP_STATUS_CODE } = require('../libs/constants')
+const { HTTP_STATUS } = require('../libs/constants')
 const SECRET_KEY = process.env.JWT_SECRET_KEY
 
 const guard = async (req, res, next) => {
@@ -8,9 +8,9 @@ const guard = async (req, res, next) => {
 	const isValid = verifyToken(token)
 
 	if (!isValid) {
-		return res.status(HTTP_STATUS_CODE.UNAUTHORIZED).send({
+		return res.status(HTTP_STATUS.UNAUTHORIZED).send({
 			status: 'error',
-			code: HTTP_STATUS_CODE.UNAUTHORIZED,
+			code: HTTP_STATUS.UNAUTHORIZED,
 			message: 'Not authorized',
 		})
 	}
@@ -19,9 +19,9 @@ const guard = async (req, res, next) => {
 	const user = await Users.findById({ _id: payload.id })
 
 	if (!user || user.token !== token) {
-		return res.status(HTTP_STATUS_CODE.UNAUTHORIZED).send({
+		return res.status(HTTP_STATUS.UNAUTHORIZED).send({
 			status: 'error',
-			code: HTTP_STATUS_CODE.UNAUTHORIZED,
+			code: HTTP_STATUS.UNAUTHORIZED,
 			message: 'Not authorized',
 		})
 	}

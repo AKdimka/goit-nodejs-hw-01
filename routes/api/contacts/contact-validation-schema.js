@@ -12,22 +12,22 @@ const schemaCreateContact = Joi.object({
 		}),
 
 	email: Joi.string()
-		.email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-		.optional(),
-
-	phone: Joi.string()
+		.trim()
+		.email()
 		.required()
 		.messages({
-			'any.required': 'Поле phone обязательно',
-			'string.empty': 'Поле phone не может быть пустым'
+			'any.required': 'Поле email обязательное',
+			'string.empty': 'Поле email не может быть пустым',
 		}),
 
-	favorite: Joi.boolean()
+	phone: Joi.string()
+		.trim()
+		.pattern(/[0-9]+/)
 		.required()
 		.messages({
-			'any.required': 'Поле favorite обязательно',
-			'string.empty': 'Поле favorite не может быть пустым'
-		})
+			'any.required': 'Поле phone обязательное',
+			'string.empty': 'Поле phone не может быть пустым',
+		}),
 })
 
 const schemaFavoriteContact = Joi.object({
@@ -39,4 +39,5 @@ const schemaFavoriteContact = Joi.object({
 const schemaMongoId = Joi.object({
 	contactId: Joi.objectId().required(),
 })
+
 module.exports = { schemaCreateContact, schemaFavoriteContact, schemaMongoId }

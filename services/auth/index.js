@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const Users = require('../../repository/users')
-const { HTTP_STATUS_CODE } = require('../../libs/constants')
+const { HTTP_STATUS } = require('../../libs/constants')
 const { CustomError } = require('../../middlewares/error-handler')
 
 const SECRET_KEY = process.env.JWT_SECRET_KEY
@@ -9,7 +9,7 @@ class AuthService {
 	async create(body) {
 		const user = await Users.findByEmail(body.email)
 		if (user) {
-			throw new CustomError(HTTP_STATUS_CODE.CONFLICT, 'User already exists')
+			throw new CustomError(HTTP_STATUS.CONFLICT, 'User already exists')
 		}
 		const newUser = await Users.create(body)
 
@@ -18,6 +18,7 @@ class AuthService {
 			name: newUser.name,
 			email: newUser.email,
 			subscription: newUser.subscription,
+			avatarURL: newUser.avatarURL,
 		}
 	}
 
@@ -25,7 +26,7 @@ class AuthService {
 		const user = await this.getUser(email, password)
 		if (!user) {
 			throw new CustomError(
-				HTTP_STATUS_CODE.UNAUTHORIZED,
+				HTTP_STATUS.UNAUTHORIZED,
 				'Email or password is wrong',
 			)
 		}

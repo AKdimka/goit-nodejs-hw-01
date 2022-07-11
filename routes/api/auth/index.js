@@ -1,10 +1,5 @@
-
 const express = require('express')
-const {
-	signup,
-	login,
-	logout
-} = require('../../../controllers/auth')
+const { signup, login, logout } = require('../../../controllers/auth')
 const { wrapper: wrapperError } = require('../../../middlewares/error-handler')
 const router = express.Router()
 const guard = require('../../../middlewares/guard')

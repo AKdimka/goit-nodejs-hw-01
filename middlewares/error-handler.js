@@ -1,5 +1,4 @@
 const { HTTP_STATUS } = require('../libs/constants')
-
 class CustomError extends Error {
 	constructor(statusCode, message, name = 'AppError') {
 		super(message)
