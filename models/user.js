@@ -1,8 +1,9 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
-const gravatar = require('gravatar')
-const { Subscription } = require('../libs/constants')
-const { Schema, model } = mongoose
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const gravatar = require('gravatar');
+const { randomUUID } = require('crypto');
+const { Subscription } = require('../libs/constants');
+const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
 	name: {
@@ -36,7 +37,15 @@ const userSchema = new Schema({
 	token: {
 		type: String,
 		default: null,
-	}
+	},
+	verify: {
+		type: Boolean,
+		default: false,
+	},
+	verificationToken: {
+		type: String,
+		default: randomUUID(),
+	},
 },
 	{
 		versionKey: false,
